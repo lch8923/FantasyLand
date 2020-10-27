@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class LookItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IGvrPointerHoverHandler
 {
+    private Animator anim;
+    private readonly int hashIsOpen = Animator.StringToHash("IsOpen");
     public void OnLookItemBox(bool isLookAt)
     {
         Debug.Log(isLookAt);
@@ -22,12 +24,16 @@ public class LookItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         Debug.Log("Reticle On");
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
-
+    public void OnBoxOpen(bool isOpen)
+    {
+        anim.SetBool(hashIsOpen, isOpen);
+    }
     // Update is called once per frame
     void Update()
     {
